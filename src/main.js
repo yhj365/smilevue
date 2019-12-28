@@ -6,11 +6,11 @@ import router from './router'
 // 不推荐全局引入，使用babel-plugin-import
 // import vant from 'vant'
 // import 'vant/lib/index.css'
-import { Button } from 'vant'
+import { Button, Row, Col } from 'vant'
 
 Vue.config.productionTip = false
 
-Vue.use(Button)
+Vue.use(Button).use(Row).use(Col)
 
 /* eslint-disable no-new */
 new Vue({

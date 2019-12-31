@@ -47,6 +47,22 @@
       </div>
     </div>
     <floor-component :floorData="recommemdGoods" :floorTitle="floorTitle"></floor-component>
+    <!--Hot Area-->
+        <div class="hot-area">
+            <div class="hot-title">热卖商品</div>
+            <div class="hot-goods">
+            <!--这里需要一个list组件-->
+                <van-list>
+                    <van-row gutter="20">
+                        <van-col span="12" v-for="(item , index) in hotGoods" :key="index">
+                                <goods-info :goodsId="item.goodsId" :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price">
+
+                                </goods-info>
+                        </van-col>
+                    </van-row>
+                </van-list>
+            </div>
+        </div>
     <swiper-default2></swiper-default2>
     <swiper-text></swiper-text>
   </div>
@@ -59,6 +75,8 @@ import {swiper, swiperSlide} from 'vue-awesome-swiper'
 import swiperDefault2 from '../swiper/swiperDefault2'
 import swiperText from '../swiper/swiperText'
 import floorComponent from '../component/floorComponent'
+import goodsInfo from '../component/goodsInfoComponent'
+import url from '@/serviceAPI.config.js'
 
 export default {
   components: {
@@ -66,7 +84,8 @@ export default {
     swiperSlide,
     swiperDefault2,
     swiperText,
-    floorComponent
+    floorComponent,
+    goodsInfo
   },
   data () {
     return {
@@ -113,12 +132,13 @@ export default {
           price: 100,
           priceOld: 200
         }
-      ]
+      ],
+      hotGoods: []
     }
   },
   created () {
     axios({
-      url: 'https://www.easy-mock.com/mock/5e096f1f1c1f71356ef22f39/example/index',
+      url: url.getShopingMallInfo,
       method: 'get'
     })
       .then(res => {
@@ -190,5 +210,15 @@ export default {
   font-size: 12px;
   text-align: center;
 }
-
+.hot-area{
+        text-align: center;
+        font-size:14px;
+        height: 1.8rem;
+        line-height:1.8rem;
+    }
+    .hot-goods{
+        height: 130rem;
+        overflow: hidden;
+        background-color: #fff;
+    }
 </style>

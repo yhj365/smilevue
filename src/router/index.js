@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import shoppingMail from '@/components/page/shoppingMail'
+import shoppingMall from '@/components/page/shoppingMall'
 
 Vue.use(Router)
 
@@ -8,8 +8,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'shoppingMail',
-      component: shoppingMail
+      name: 'shoppingMall',
+      component: shoppingMall
     }
   ]
 })

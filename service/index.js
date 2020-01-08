@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 ;(async () => {
   await connect()
   initSchemas()
-  
+
   const User = mongoose.model('User')
   let oneUser = new User({
     userName: 'haojie2',

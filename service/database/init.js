@@ -1,5 +1,11 @@
 const mongoose = require('mongoose')
 const db = 'mongodb://localhost/smile-db'
+const glob = require('glob')
+const {resolve} = require('path')
+
+exports.initSchemas = ()=>{
+  glob.sync(resolve(__dirname, './schema', '**/*.js')).forEach(require)
+}
 
 exports.connect = () => {
   // 连接数据库
@@ -32,10 +38,9 @@ exports.connect = () => {
 
     mongoose.connection.once('open', () => {
       console.log('数据库连接成功')
+      resolve()
     })
 
   })
-
-
 }
 

@@ -217,7 +217,7 @@ export default {
         line-height:1.8rem;
     }
     .hot-goods{
-        height: 130rem;
+        height: 13rem;
         overflow: hidden;
         background-color: #fff;
     }

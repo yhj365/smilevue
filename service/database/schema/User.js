@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs')
 const SALT_WORK_FACTOR = 10
 
 let ObjectID = Schema.Types.ObjectID
-
+mongoose.set('useCreateIndex', true)
 // 创建UserSchema
 const userSchema = new Schema({
   userID: ObjectID,
@@ -13,6 +13,9 @@ const userSchema = new Schema({
   password: String,
   createAt: {type: Date, default: Date.now()},
   lastLoginAt: {type: Date, default: Date.now()}
+}, {
+  // 配置项，防止mongodb自动加s
+  // collation: 'user'
 })
 userSchema.pre('save', function(next){
   bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {

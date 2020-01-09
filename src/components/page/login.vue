@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar title="用户注册" left-text="返回" left-arrow @click-left="goBack"></van-nav-bar>
+    <van-nav-bar title="用户登录"></van-nav-bar>
     <div class="register-panel">
       <van-field
         label="用户名"
@@ -20,7 +20,7 @@
         :error-message="passwordErrorMsg"
       />
       <div class="register-button">
-        <van-button type="primary" size="large" @click="registerAction" :loading="openLoading">立即注册</van-button>
+        <van-button type="primary" size="large" @click="registerAction" :loading="openLoading">立即登录</van-button>
       </div>
     </div>
   </div>
@@ -40,17 +40,20 @@ export default {
       passwordErrorMsg: ''
     }
   },
+  created () {
+    if (localStorage.userInfo) {
+      Toast.success('您已经登录')
+      this.$router.push('/')
+    }
+  },
   methods: {
-    goBack () {
-      this.$router.go(-1)
-    },
     registerAction () {
       this.checkForm() && this.axiosRegisterUser()
     },
     axiosRegisterUser () {
       this.openLoading = true
       axios({
-        url: url.registerUser,
+        url: url.login,
         method: 'post',
         data: {
           userName: this.userName,
@@ -58,17 +61,27 @@ export default {
         }
       })
         .then(res => {
-          if (res.data.code === 200) {
-            Toast.success(res.data.message)
-            this.$router.push('/')
+          if (res.data.code === 200 && res.data.message) {
+            new Promise((resolve, reject) => {
+              localStorage.userInfo = { userName: this.userName }
+              setTimeout(() => { resolve() }, 500)
+            })
+              .then(res => {
+                Toast.success('登录成功')
+                this.$router.push('/')
+              })
+              .catch(err => {
+                console.log(err)
+                Toast.fail('登录状态保存失败')
+              })
           } else {
             this.openLoading = false
-            Toast.fail('注册失败')
+            Toast.fail('登录失败')
           }
         })
         .catch(err => {
           console.log(err)
-          Toast.fail('注册失败')
+          Toast.fail('登录失败')
         })
     },
     checkForm () {

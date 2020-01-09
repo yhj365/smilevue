@@ -25,9 +25,9 @@ app.use(router.allowedMethods())
   initSchemas()
 })()
 
-app.use(async(ctx) => {
-  ctx.body = '<h1>hello koa</h1>'
-})
+// app.use(async(ctx) => {
+//   ctx.body = '<h1>hello koa</h1>'
+// })
 
 app.listen(3000,()=>{
   console.log('server start')

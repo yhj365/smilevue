@@ -18,6 +18,10 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: resolve => require(['@/components/page/login'], resolve)
+    }, {
+      path: '/Goods',
+      name: 'Goods',
+      component: resolve => require(['@/components/page/Goods'], resolve)
     }
   ]
 })

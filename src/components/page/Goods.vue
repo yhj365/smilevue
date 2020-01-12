@@ -51,6 +51,9 @@ export default {
     goBack () {
       this.$router.go(-1)
     },
+    addGoodsToCart () {
+
+    },
     getInfo () {
       axios({
         url: url.getDetailGoodsInfo,

@@ -22,6 +22,10 @@ export default new Router({
       path: '/Goods',
       name: 'Goods',
       component: resolve => require(['@/components/page/Goods'], resolve)
+    }, {
+      path: '/CategoryList',
+      name: 'CategoryList',
+      component: resolve => require(['@/components/page/CategoryList'], resolve)
     }
   ]
 })

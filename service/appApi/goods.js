@@ -87,9 +87,9 @@ router.get('/getCategoryList', async (ctx) => {
 // 获取二级分类
 router.post('/getCategorySubList', async (ctx) => {
   try {
-    let CategoryId = ctx.request.body.CategoryId
+    let categoryId = ctx.request.body.categoryId
     const CategorySub = mongoose.model('CategorySub')
-    let result = await CategorySub.find({MALL_CATEGORY_ID: CategoryId}).exec()
+    let result = await CategorySub.find({MALL_CATEGORY_ID: categoryId}).exec()
     ctx.body = { code: 200, message: result }
   }catch (err) {
     ctx.body = { code: 500, message: err }
@@ -97,11 +97,11 @@ router.post('/getCategorySubList', async (ctx) => {
 })
 
 // 根据类别获取商品列表
-router.post('/getGoodsListByCategoryID', async (ctx) => {
+router.post('/getGoodsListByCategorySubID', async (ctx) => {
   try {
-    let CategorySubId = ctx.request.body.CategorySubId
+    let categorySubId = ctx.request.body.categorySubId
     const Goods = mongoose.model('Goods')
-    let result = await Goods.find({SUB_ID: CategorySubId}).exec()
+    let result = await Goods.find({SUB_ID: categorySubId}).exec()
     ctx.body = { code: 200, message: result }
   }catch (err) {
     ctx.body = { code: 500, message: err }

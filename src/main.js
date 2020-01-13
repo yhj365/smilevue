@@ -6,12 +6,12 @@ import router from './router'
 // 不推荐全局引入，使用babel-plugin-import
 // import vant from 'vant'
 // import 'vant/lib/index.css'
-import { Button, Row, Col, Swipe, SwipeItem, Lazyload, List, Field, NavBar, Tabs, Tab } from 'vant'
+import {PullRefresh, Button, Row, Col, Swipe, SwipeItem, Lazyload, List, Field, NavBar, Tabs, Tab } from 'vant'
 
 Vue.config.productionTip = false
 
 Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload).use(List)
-  .use(Field).use(NavBar).use(Tabs).use(Tab)
+  .use(Field).use(NavBar).use(Tabs).use(Tab).use(PullRefresh)
 
 /* eslint-disable no-new */
 new Vue({

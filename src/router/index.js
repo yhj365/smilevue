@@ -7,10 +7,25 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'shoppingMall',
-      component: resolve => require(['@/components/page/shoppingMall'], resolve)
-    }, {
+      path: '/Main',
+      name: 'Main',
+      component: resolve => require(['@/components/page/Main'], resolve),
+      children: [
+        {
+          path: '/',
+          name: 'shoppingMall',
+          component: resolve => require(['@/components/page/shoppingMall'], resolve)
+        }, {
+          path: '/CategoryList',
+          name: 'CategoryList',
+          component: resolve => require(['@/components/page/CategoryList'], resolve)
+        }, {
+          path: '/Cart',
+          name: 'Cart',
+          component: resolve => require(['@/components/page/Cart'], resolve)
+        }
+      ]
+    },{
       path: '/register',
       name: 'register',
       component: resolve => require(['@/components/page/register'], resolve)
@@ -22,10 +37,6 @@ export default new Router({
       path: '/Goods',
       name: 'Goods',
       component: resolve => require(['@/components/page/Goods'], resolve)
-    }, {
-      path: '/CategoryList',
-      name: 'CategoryList',
-      component: resolve => require(['@/components/page/CategoryList'], resolve)
     }
   ]
 })

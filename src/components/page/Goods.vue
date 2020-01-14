@@ -52,7 +52,23 @@ export default {
       this.$router.go(-1)
     },
     addGoodsToCart () {
-
+      let cartInfo = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo) : []
+      let isHaveGoods = cartInfo.find(cart => cart.goodsId == this.goodsId)
+      console.log(isHaveGoods)
+      if(!isHaveGoods) {
+        let newGoodsInfo = {
+          goodsId: this.goodsInfo.ID,
+          Name: this.goodsInfo.Name,
+          price: this.goodsInfo.PRESENT_PRICE,
+          image: this.goodsInfo.IMAGE1,
+          count: 1
+        }
+        cartInfo.push(newGoodsInfo)
+        localStorage.cartInfo = JSON.stringify(cartInfo)
+        Toast.success('添加购物车成功')
+      } else {
+        Toast.success('已有此商品')
+      }
     },
     getInfo () {
       axios({

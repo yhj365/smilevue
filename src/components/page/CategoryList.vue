@@ -25,7 +25,7 @@
           </div>
           <div id="list-div">
             <van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
-              <van-list v-model="loading" :finished="finished" @load="onLoad">
+              <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
                 <div
                   class="list-item"
                   @click="goGoodsInfo(item.ID)"
@@ -33,7 +33,7 @@
                   :key="index"
                 >
                   <div class="list-item-img">
-                    <img :src="item.IMAGE1" width="100%" :onerror="errorImg" />
+                    <img v-lazy="item.IMAGE1" width="100%" :onerror="errorImg" />
                   </div>
                   <div class="list-item-text">
                     <div>{{item.NAME}}</div>
@@ -64,6 +64,7 @@ export default {
       active: 0, //激活标签的值
       loading: false,
       finished: false, //上拉加载是否有数据
+      num: 8,
       page: 1, //商品列表的页数
       goodList: [], //商品列表信息
       categorySubId: '', //商品子类ID
@@ -116,7 +117,6 @@ export default {
         data: { categoryId: categoryId }
       })
         .then(response => {
-          console.log(response)
           if (response.data.code == 200 && response.data.message) {
             this.categorySub = response.data.message
             this.active = 0
@@ -134,6 +134,7 @@ export default {
         method: 'post',
         data: {
           categorySubId: this.categorySubId,
+          num: this.num,
           page: this.page
         }
       })

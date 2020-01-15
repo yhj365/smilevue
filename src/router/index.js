@@ -7,7 +7,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/Main',
+      path: '/',
       name: 'Main',
       component: resolve => require(['@/components/page/Main'], resolve),
       children: [
@@ -23,6 +23,10 @@ export default new Router({
           path: '/Cart',
           name: 'Cart',
           component: resolve => require(['@/components/page/Cart'], resolve)
+        }, {
+          path: '/Member',
+          name: 'Member',
+          component: resolve => require(['@/components/page/Member'], resolve)
         }
       ]
     },{
